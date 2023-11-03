@@ -55,6 +55,13 @@ class _AdminLayoutState extends State<AdminLayout>
     super.dispose();
   }
 
+  final List<Widget> _pages = [
+    const Text('Dashboard'),
+    const Text('UHC'),
+    const Text('Usulan'),
+    const Text('Akun')
+  ];
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -76,6 +83,9 @@ class _AdminLayoutState extends State<AdminLayout>
               Expanded(
                 child: Container(
                   color: _backgroundColor,
+                  child: Center(
+                    child: _pages[selectedIndex],
+                  ),
                 ),
               ),
             ],
