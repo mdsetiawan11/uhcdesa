@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -22,9 +23,9 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
       backgroundColor: AppColors.secondary,
       appBar: AppBar(
         backgroundColor: AppColors.secondary,
-        title: Text(
+        title: const Text(
           'D A S H B O A R D ',
-          style: const TextStyle(color: Color.fromRGBO(96, 64, 131, 1)),
+          style: TextStyle(color: AppColors.primary),
         ),
         actions: const [
           Icon(
@@ -45,9 +46,12 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: AnimateList(
+              interval: 400.ms,
+              effects: [FadeEffect()],
               children: [
                 SizedBox(
                   height: (width > 950) ? height / 5 : height / 3,
@@ -57,7 +61,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 20,
                     childAspectRatio: 2 / 0.8,
-                    children: const [
+                    children: [
                       UhcCard(
                         iconData: FontAwesomeIcons.peopleGroup,
                         label: 'Jumlah Penduduk',
@@ -89,7 +93,9 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
                   onToggle: (index) {},
                 ),
               ],
-            )),
+            ),
+          ),
+        ),
       ),
     );
   }

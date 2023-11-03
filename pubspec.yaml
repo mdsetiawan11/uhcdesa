@@ -17,6 +17,7 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   toggle_switch: ^2.1.0
   flutter_riverpod:
+  flutter_animate: ^4.2.0+1
 
 dev_dependencies:
   flutter_test:

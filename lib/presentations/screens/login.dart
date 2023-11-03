@@ -42,10 +42,13 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Icon(
-                    Icons.android,
-                    size: 70,
-                    color: AppColors.primary,
+                  Text(
+                    'A L A R M  U H C  D E S A',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   TextField(
                     controller: _usernameController,
@@ -94,9 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: AppColors.primary,
                       onPressed: () {
                         context.goNamed('admin');
+                        print(_usernameController.text);
                       },
                       child: const Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Text(
                           'Login',
                           style: TextStyle(color: Colors.white, fontSize: 18),
