@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import 'package:uhcdesa/configs/colors.dart';
+import 'package:uhcdesa/presentations/widgets/uhc_card.dart';
 
-class AdminDashboardScreen extends StatefulWidget {
+class AdminDashboardScreen extends ConsumerStatefulWidget {
   const AdminDashboardScreen({super.key});
 
   @override
-  State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
+  ConsumerState<AdminDashboardScreen> createState() =>
+      _AdminDashboardScreenState();
 }
 
-class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.secondary,
       appBar: AppBar(
         backgroundColor: AppColors.secondary,
-        title: const Text(
-          'D A S H B O A R D',
-          style: TextStyle(color: Color.fromRGBO(96, 64, 131, 1)),
+        title: Text(
+          'D A S H B O A R D ',
+          style: const TextStyle(color: Color.fromRGBO(96, 64, 131, 1)),
         ),
         actions: const [
           Icon(
@@ -37,19 +43,54 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ],
       ),
-      body: Padding(
-          padding: EdgeInsets.all(8),
-          child: GridView.count(
-            crossAxisCount: (width > 600) ? 4 : 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: [
-              Card(),
-              Card(),
-              Card(),
-              Card(),
-            ],
-          )),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: (width > 950) ? height / 5 : height / 3,
+                  width: double.infinity,
+                  child: GridView.count(
+                    crossAxisCount: (width > 950) ? 4 : 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 2 / 0.8,
+                    children: const [
+                      UhcCard(
+                        iconData: FontAwesomeIcons.peopleGroup,
+                        label: 'Jumlah Penduduk',
+                        value: '174150',
+                      ),
+                      UhcCard(
+                        iconData: FontAwesomeIcons.house,
+                        label: 'Jumlah Kecamatan',
+                        value: '13',
+                      ),
+                      UhcCard(
+                        iconData: FontAwesomeIcons.houseUser,
+                        label: 'Jumlah Desa',
+                        value: '161',
+                      ),
+                      UhcCard(
+                        iconData: FontAwesomeIcons.heartPulse,
+                        label: 'Cakupan UHC',
+                        value: '101.66 %',
+                      ),
+                    ],
+                  ),
+                ),
+                ToggleSwitch(
+                  minWidth: 150,
+                  initialLabelIndex: 0,
+                  totalSwitches: 3,
+                  labels: const ['Segmen', 'Kecamatan', 'Desa'],
+                  onToggle: (index) {},
+                ),
+              ],
+            )),
+      ),
     );
   }
 }

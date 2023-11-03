@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uhcdesa/configs/colors.dart';
 import 'package:uhcdesa/layout/admin_layout.dart';
 import 'package:uhcdesa/presentations/screens/login.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -23,14 +24,14 @@ class _MyAppState extends State<MyApp> {
         path: '/login',
         name: 'login',
         builder: (context, state) {
-          return LoginScreen();
+          return const LoginScreen();
         },
       ),
       GoRoute(
         path: '/admin',
         name: 'admin',
         builder: (context, state) {
-          return AdminLayout();
+          return const AdminLayout();
         },
       ),
     ],

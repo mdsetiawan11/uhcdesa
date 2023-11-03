@@ -11,10 +11,20 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _passwordVisible = true;
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     _passwordVisible = false;
+  }
+
+  @override
+  void dispose() {
+    _usernameController;
+    _passwordController;
+    super.dispose();
   }
 
   @override
@@ -37,8 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     size: 70,
                     color: AppColors.primary,
                   ),
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(
                       labelText: 'username',
                       enabledBorder:
                           UnderlineInputBorder(borderSide: BorderSide.none),
@@ -48,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   TextField(
+                    controller: _passwordController,
                     obscureText: !_passwordVisible,
                     decoration: InputDecoration(
                       labelText: 'password',

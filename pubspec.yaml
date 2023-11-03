@@ -14,12 +14,16 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   go_router:
+  font_awesome_flutter: ^10.6.0
+  toggle_switch: ^2.1.0
+  flutter_riverpod:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+  freezed:
 
 flutter:
   uses-material-design: true
