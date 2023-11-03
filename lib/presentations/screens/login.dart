@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uhcdesa/configs/colors.dart';
 
@@ -33,82 +34,101 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: AppColors.secondary,
       body: Center(
         child: SizedBox(
-          height: 350,
-          width: 350,
+          height: 300,
+          width: 300,
           child: Card(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'A L A R M  U H C  D E S A',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                      labelText: 'username',
-                      enabledBorder:
-                          UnderlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.primary),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: AnimateList(
+                  interval: 400.ms,
+                  effects: [const FadeEffect()],
+                  children: [
+                    const Text(
+                      'A L A R M  U H C  D E S A',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: !_passwordVisible,
-                    decoration: InputDecoration(
-                      labelText: 'password',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          // Based on passwordVisible state choose the icon
-                          _passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: TextField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          labelText: 'username',
+                          enabledBorder:
+                              UnderlineInputBorder(borderSide: BorderSide.none),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: AppColors.primary),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: TextField(
+                        controller: _passwordController,
+                        obscureText: !_passwordVisible,
+                        decoration: InputDecoration(
+                          labelText: 'password',
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: AppColors.primary,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
+                          ),
+                          enabledBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: MaterialButton(
                           color: AppColors.primary,
-                        ),
-                        onPressed: () {
-                          // Update the state i.e. toogle the state of passwordVisible variable
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                      ),
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      focusedBorder: const UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primary,
+                          onPressed: () {
+                            context.goNamed('admin');
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(5.0),
+                            child: Text(
+                              'Login',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: MaterialButton(
-                      color: AppColors.primary,
-                      onPressed: () {
-                        context.goNamed('admin');
-                        print(_usernameController.text);
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

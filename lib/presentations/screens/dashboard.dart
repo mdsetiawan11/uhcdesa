@@ -46,7 +46,7 @@ class _AdminDashboardScreenState extends ConsumerState<AdminDashboardScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: AnimateList(
