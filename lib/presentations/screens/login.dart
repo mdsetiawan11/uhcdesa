@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uhcdesa/configs/colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,10 +10,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _passwordVisible = true;
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final double width = MediaQuery.of(context).size.width;
+  void initState() {
+    super.initState();
+    _passwordVisible = false;
   }
 
   @override
@@ -20,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: AppColors.secondary,
       body: Center(
-        child: Container(
+        child: SizedBox(
           height: 350,
           width: 350,
           child: Card(
@@ -39,19 +41,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       labelText: 'username',
                       enabledBorder:
-                          OutlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
+                          UnderlineInputBorder(borderSide: BorderSide.none),
+                      focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: AppColors.primary),
                       ),
                     ),
                   ),
-                  const TextField(
+                  TextField(
+                    obscureText: !_passwordVisible,
                     decoration: InputDecoration(
                       labelText: 'password',
-                      enabledBorder:
-                          OutlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.primary),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: AppColors.primary,
+                        ),
+                        onPressed: () {
+                          // Update the state i.e. toogle the state of passwordVisible variable
+                          setState(() {
+                            _passwordVisible = !_passwordVisible;
+                          });
+                        },
+                      ),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   ),
@@ -59,10 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.infinity,
                     child: MaterialButton(
                       color: AppColors.primary,
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text(
+                      onPressed: () {
+                        context.goNamed('admin');
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
                           'Login',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),

@@ -3,6 +3,7 @@ import 'package:uhcdesa/configs/colors.dart';
 import 'package:uhcdesa/layout/animations.dart';
 import 'package:uhcdesa/layout/disappearing_bottom_navigation_bar.dart';
 import 'package:uhcdesa/layout/disappearing_navigation_rail.dart';
+import 'package:uhcdesa/presentations/screens/dashboard.dart';
 
 class AdminLayout extends StatefulWidget {
   const AdminLayout({super.key});
@@ -56,7 +57,7 @@ class _AdminLayoutState extends State<AdminLayout>
   }
 
   final List<Widget> _pages = [
-    const Text('Dashboard'),
+    const AdminDashboardScreen(),
     const Text('UHC'),
     const Text('Usulan'),
     const Text('Akun')
